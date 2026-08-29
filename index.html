@@ -625,6 +625,8 @@ var cover = document.getElementById('cover');
 var opened = false;
 document.getElementById('sealBtn').addEventListener('click', openInvite);
 cover.addEventListener('click', function(e){ if(!opened) openInvite(); });
+/* open by itself if the guest doesn't tap */
+setTimeout(function(){ if(!opened) openInvite(); }, 2200);
 function openInvite(){
   if(opened) return; opened = true;
   cover.classList.add('opening');
