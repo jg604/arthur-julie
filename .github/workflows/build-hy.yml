@@ -1,0 +1,24 @@
+name: Build Armenian page
+on:
+  push:
+    paths:
+      - build_hy.py
+      - .github/workflows/build-hy.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build hy.html from index.html
+        run: python3 build_hy.py
+      - name: Commit hy.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hy.html
+          git rm -q build_hy.py
+          git commit -m "Add Armenian version of the invitation (hy.html)"
+          git push
